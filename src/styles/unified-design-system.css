@@ -1,0 +1,454 @@
+/* UNIFIED PREMIUM DESIGN SYSTEM - Warm Minimalist Aesthetic */
+/* Based on CustomerMenu's refined restaurant aesthetic */
+/* Applied consistently across Staff Dashboard, Admin, and all interfaces */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* ============================================
+   DESIGN TOKENS - Light Theme
+   ============================================ */
+:root {
+  /* Background Colors - Warm, inviting neutrals */
+  --color-bg-primary: #F5F1EB;      /* Warm cream background */
+  --color-bg-secondary: #F0EDE8;    /* Slightly darker cream */
+  --color-surface: #FFFFFF;          /* Pure white cards/surfaces */
+  
+  /* Text Colors - High contrast hierarchy */
+  --color-text-primary: #0A0A0A;     /* Deep black for primary text */
+  --color-text-secondary: #5A554B;   /* Warm gray for secondary */
+  --color-text-muted: #8A857B;       /* Muted gray for hints/labels */
+  
+  /* Border Colors - Subtle definition */
+  --color-border: #E2DDD5;           /* Warm light gray border */
+  --color-border-hover: #0A0A0A;     /* Black on hover for emphasis */
+  
+  /* Accent Colors - Purposeful highlights */
+  --color-accent: #C47A3D;           /* Warm amber/gold accent */
+  --color-accent-light: #D48A4D;     /* Lighter amber variant */
+  
+  /* Status Colors - Semantic meaning */
+  --color-success: #2D6A4F;          /* Forest green for success */
+  --color-warning: #C47A3D;          /* Amber for warnings */
+  --color-error: #CC3333;            /* Refined red for errors */
+  --color-info: #6B7B8D;             /* Soft blue-gray for info */
+  
+  /* Shadows - Clean, subtle depth (no glows) */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.10);
+  --shadow-none: none;
+  
+  /* Typography */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Spacing Scale */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  
+  /* Border Radius - SHARP CORNERS for premium feel */
+  --radius-none: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-full: 9999px; /* Only for badges/pills */
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   DESIGN TOKENS - Dark Theme
+   ============================================ */
+.dark {
+  /* Background Colors - Deep charcoal with warm undertones */
+  --color-bg-primary: #141210;       /* Deep charcoal */
+  --color-bg-secondary: #1E1B18;     /* Slightly lighter charcoal */
+  --color-surface: #292522;          /* Dark surface for cards */
+  
+  /* Text Colors - Crisp white hierarchy */
+  --color-text-primary: #F5F5F5;     /* Off-white for primary */
+  --color-text-secondary: #C8C4BE;   /* Light gray for secondary */
+  --color-text-muted: #A09A92;       /* Muted gray for hints */
+  
+  /* Border Colors - Dark warm grays */
+  --color-border: #332F2C;           /* Dark border */
+  --color-border-hover: #F5F5F5;     /* White on hover */
+  
+  /* Accent Colors - Same warmth, adjusted for dark */
+  --color-accent: #D48A4D;           /* Brighter amber for dark mode */
+  --color-accent-light: #E49A5D;     /* Even lighter variant */
+  
+  /* Status Colors - Adjusted for dark backgrounds */
+  --color-success: #3D8B65;          /* Brighter green */
+  --color-warning: #D48A4D;          /* Brighter amber */
+  --color-error: #E04040;            /* Brighter red */
+  --color-info: #8B9BAD;             /* Brighter blue-gray */
+  
+  /* Shadows - Minimal in dark mode */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --shadow-none: none;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+/* ============================================
+   TYPOGRAPHY SCALE
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+h1 { font-size: 2.5rem; }    /* 40px */
+h2 { font-size: 2rem; }      /* 32px */
+h3 { font-size: 1.5rem; }    /* 24px */
+h4 { font-size: 1.25rem; }   /* 20px */
+h5 { font-size: 1.125rem; }  /* 18px */
+h6 { font-size: 1rem; }      /* 16px */
+
+p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.text-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.text-small {
+  font-size: 0.875rem;  /* 14px */
+}
+
+.text-xs {
+  font-size: 0.75rem;   /* 12px */
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Sharp corners everywhere */
+.sharp {
+  border-radius: var(--radius-none) !important;
+}
+
+/* Premium card styling */
+.premium-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-none);
+  transition: all var(--transition-base);
+}
+
+.premium-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Button base styles */
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  border-radius: var(--radius-none);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 44px; /* Accessibility: minimum touch target */
+}
+
+.btn-premium:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--color-text-primary);
+  color: var(--color-surface);
+  border-color: var(--color-text-primary);
+}
+
+.btn-primary:hover {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border-hover);
+}
+
+.btn-outline {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-border-hover);
+  background: var(--color-bg-secondary);
+}
+
+.btn-accent {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+}
+
+.btn-accent:hover {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent-light);
+}
+
+/* Badge/Pill styling */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+}
+
+.badge-default {
+  background: var(--color-text-primary);
+  color: var(--color-surface);
+}
+
+.badge-success {
+  background: var(--color-success);
+  color: white;
+}
+
+.badge-warning {
+  background: var(--color-warning);
+  color: white;
+}
+
+.badge-error {
+  background: var(--color-error);
+  color: white;
+}
+
+/* Status indicators */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot.active {
+  background: var(--color-success);
+}
+
+.status-dot.pending {
+  background: var(--color-warning);
+}
+
+.status-dot.inactive {
+  background: var(--color-text-muted);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Focus states - clear and visible */
+*:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(10, 10, 10, 0.1);
+}
+
+.dark *:focus-visible {
+  outline-color: var(--color-text-primary);
+  box-shadow: 0 0 0 4px rgba(245, 245, 245, 0.1);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: #0A0A0A;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dark {
+    --color-border: #F5F5F5;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ============================================
+   SCROLLBAR STYLING - Minimal & Clean
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Hide scrollbar for specific elements */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================
+   ANIMATION UTILITIES
+   ============================================ */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from { 
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-base) ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp var(--transition-slow) ease-out;
+}
+
+.animate-slide-in {
+  animation: slideInRight var(--transition-base) ease-out;
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+
+.container-premium {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .container-premium {
+    padding: 0 var(--space-4);
+  }
+  
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.25rem; }
+}
