@@ -45,3 +45,15 @@ Thumbs.db
 
 # Vercel
 .vercel
+
+# Test files (NEVER commit - may contain credentials)
+test-*.js
+test-*.html
+*.test.js
+*.spec.js
+tests/
+
+# Debug and temporary files
+debug-*.js
+check-*.js
+*.tmp.js
