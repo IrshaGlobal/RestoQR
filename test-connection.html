@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Supabase Login Test</title>
+  <style>
+    body { font-family: Arial; padding: 20px; max-width: 600px; margin: 0 auto; }
+    .success { color: green; }
+    .error { color: red; }
+    .info { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; }
+    button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    input { padding: 8px; margin: 5px 0; width: 100%; box-sizing: border-box; }
+  </style>
+</head>
+<body>
+  <h1>🔐 Supabase Login Test</h1>
+  
+  <div class="info">
+    <p>This page tests your Supabase authentication setup.</p>
+  </div>
+  
+  <h2>Login Test</h2>
+  <input type="email" id="email" placeholder="Email" value="admin@test.com">
+  <input type="password" id="password" placeholder="Password" value="admin123">
+  <button onclick="testLogin()">Test Login</button>
+  
+  <div id="results"></div>
+  
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    
+    const supabase = createClient(
+      'https://ftuihzoapphxmakufpxf.supabase.co',
+      'sb_secret_FiSn3D9FvmJXDjBoA98MJw_wj3lHz4e'
+    );
+    
+    window.testLogin = async function() {
+      const results = document.getElementById('results');
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      results.innerHTML = '<p>Testing...</p>';
+      
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+        
+        if (error) {
+          results.innerHTML = `
+            <h3 class="error">❌ Login Failed</h3>
+            <p><strong>Error:</strong> ${error.message}</p>
+            <p><strong>Status:</strong> ${error.status}</p>
+            <div class="info">
+              <p><strong>Possible fixes:</strong></p>
+              <ul>
+                <li>Check if email confirmation is required (disable it in Auth settings)</li>
+                <li>Verify the user exists in Authentication > Users</li>
+                <li>Make sure the password is correct</li>
+                <li>Check browser console for more details</li>
+              </ul>
+            </div>
+          `;
+        } else {
+          results.innerHTML = `
+            <h3 class="success">✅ Login Successful!</h3>
+            <p><strong>User ID:</strong> ${data.user.id}</p>
+            <p><strong>Email:</strong> ${data.user.email}</p>
+            <p><strong>Email Confirmed:</strong> ${data.user.email_confirmed_at ? '✅ Yes' : '❌ No'}</p>
+          `;
+          
+          // Check restaurant_staff linkage
+          const { data: staffData, error: staffError } = await supabase
+            .from('restaurant_staff')
+            .select('*, restaurants(name)')
+            .eq('user_id', data.user.id)
+            .single();
+          
+          if (staffError) {
+            results.innerHTML += `
+              <h3 class="error">⚠️ User Not Linked to Restaurant</h3>
+              <p>The user exists but is not linked to any restaurant.</p>
+              <p><strong>Fix:</strong> Run this SQL:</p>
+              <pre>INSERT INTO restaurant_staff (user_id, restaurant_id, role)
+VALUES ('${data.user.id}', 'YOUR_RESTAURANT_ID', 'admin');</pre>
+            `;
+          } else {
+            results.innerHTML += `
+              <h3 class="success">✅ User Properly Linked!</h3>
+              <p><strong>Role:</strong> ${staffData.role}</p>
+              <p><strong>Restaurant:</strong> ${staffData.restaurants?.name}</p>
+              <p class="success"><strong>🎉 Everything is configured correctly!</strong></p>
+            `;
+          }
+        }
+      } catch (err) {
+        results.innerHTML = `
+          <h3 class="error">❌ Unexpected Error</h3>
+          <p>${err.message}</p>
+        `;
+      }
+    };
+  </script>
+</body>
+</html>

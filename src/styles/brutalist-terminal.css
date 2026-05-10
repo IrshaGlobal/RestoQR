@@ -1,0 +1,115 @@
+/* Brutalist Command Terminal - Custom Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Syne:wght@700;800&display=swap');
+
+/* Theme Variables */
+:root {
+  /* Light Theme (Default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-card: #fafafa;
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+  --border-color: #e0e0e0;
+  --accent-cyan: #00F0FF;
+  --accent-pink: #FF006E;
+  --accent-green: #00FF88;
+}
+
+.dark {
+  /* Dark Theme */
+  --bg-primary: #000000;
+  --bg-secondary: #1a1a1a;
+  --bg-card: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --accent-cyan: #00F0FF;
+  --accent-pink: #FF006E;
+  --accent-green: #00FF88;
+}
+
+/* Scan Line Animation */
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+/* Glitch Effect */
+@keyframes glitch {
+  0%, 100% {
+    text-shadow: -2px -2px 0 #00F0FF, 2px 2px 0 #FF006E;
+  }
+  25% {
+    text-shadow: 2px 2px 0 #00F0FF, -2px -2px 0 #FF006E;
+  }
+  50% {
+    text-shadow: -2px 2px 0 #00F0FF, 2px -2px 0 #FF006E;
+  }
+  75% {
+    text-shadow: 2px -2px 0 #00F0FF, -2px 2px 0 #FF006E;
+  }
+}
+
+/* Pulse Glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.8), 0 0 40px rgba(0, 240, 255, 0.5);
+  }
+}
+
+/* Blink */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Apply monospace font globally for staff dashboard */
+.font-mono {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* Custom scrollbar for brutalist theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-cyan);
+  border: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+}
+
+/* Selection color */
+::selection {
+  background: #00F0FF;
+  color: #000;
+}
+
+::-moz-selection {
+  background: #00F0FF;
+  color: #000;
+}
